@@ -67,4 +67,40 @@ public class RestockEvalFixture {
 		
 		return jsonArray;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public static JSONArray getOrdersList() {
+
+		JSONArray jsonArray = new JSONArray();
+
+		JSONObject jsonObject1 = new JSONObject();
+		jsonObject1.put("order_id", "630");
+		jsonObject1.put("customer_id", "4");
+		jsonObject1.put("order_date", "2018-03-09T13:13:29");
+		jsonObject1.put("item_ordered", "sled");
+		jsonObject1.put("item_quantity", "6");
+		jsonObject1.put("item_price", "96.93");
+
+		JSONObject jsonObject2 = new JSONObject();
+		jsonObject2.put("order_id", "614");
+		jsonObject2.put("customer_id", "4");
+		jsonObject2.put("order_date", "2018-02-10T01:40:52");
+		jsonObject2.put("item_ordered", "tire");
+		jsonObject2.put("item_quantity", "10");
+		jsonObject2.put("item_price", "102.75");
+
+		JSONObject jsonObject3 = new JSONObject();
+		jsonObject3.put("order_id", "615");
+		jsonObject3.put("customer_id", "6");
+		jsonObject3.put("order_date", "2018-02-20T11:35:52");
+		jsonObject3.put("item_ordered", "tire");
+		jsonObject3.put("item_quantity", "10");
+		jsonObject3.put("item_price", "112.75");
+
+		jsonArray.add(jsonObject1);
+		jsonArray.add(jsonObject2);
+		jsonArray.add(jsonObject3);
+
+		return jsonArray;
+	}
 }

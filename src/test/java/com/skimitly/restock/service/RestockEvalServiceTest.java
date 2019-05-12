@@ -104,4 +104,57 @@ public class RestockEvalServiceTest {
 		Map<String, int[]> restockMonthmap = service.loadRestocksFromFile("restocks.json");
 		assertNotNull(restockMonthmap);
 	}
+	
+	@Test
+	public void test_loadOrdersFromFile() throws Exception {
+
+		new Expectations() {
+			{
+				new FileReader(anyString);
+				result=fileReader;
+				parser.parse((FileReader) any);
+				result = (JSONArray) RestockEvalFixture.getOrdersList();
+			}
+		};
+
+		Map<String, int[]> ordersByMonths = service.loadOrdersFromFile("orders.json");
+
+		assertNotNull(ordersByMonths);
+		assertEquals(2,ordersByMonths.size());
+		assertNotNull(ordersByMonths.get("tire"));
+		assertNotNull(ordersByMonths.get("sled"));
+		assertEquals(12,ordersByMonths.get("tire").length);
+		assertEquals(12,ordersByMonths.get("sled").length);
+		assertEquals(20,ordersByMonths.get("tire")[1]);
+		assertEquals(6, ordersByMonths.get("sled")[2]);
+	}
+
+	
+	@Test(expected = FileNotFoundException.class)
+	public void test_loadOrdersFromFile_FileNotFoundException() throws Exception {
+		new Expectations() {
+			{
+				new FileReader(anyString);
+				result = new FileNotFoundException();
+			}
+		};
+
+		Map<String, int[]> orderMonthmap = service.loadOrdersFromFile("orders.json");
+		assertNotNull(orderMonthmap);
+	}
+
+	
+	@Test(expected = IOException.class)
+	public void test_loadOrdersFromFile_IOException() throws Exception {
+
+		new Expectations() {
+			{
+				new FileReader(anyString);
+				result = new IOException();
+			}
+		};
+
+		Map<String, int[]> orderMonthmap = service.loadOrdersFromFile("orders.json");
+		assertNotNull(orderMonthmap);
+	}
 }

@@ -6,6 +6,7 @@ package com.skimitly.restock.service;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.HashMap;
 import java.util.Map;
@@ -67,5 +68,53 @@ public class RestockEvalService {
 		}
 		
 		return restocksByMonths;
+	}
+	
+	
+	
+	/**
+	 * Method to parse the orders.json file and create the map
+	 * @param fileName
+	 * @return
+	 * @throws Exception
+	 */
+	public Map<String, int[]> loadOrdersFromFile(String fileName) throws Exception{
+		
+		Map<String, int[]> ordersByMonths = new HashMap<>();
+		JSONParser parser = new JSONParser();
+		
+		try {
+			
+			JSONArray ordersJson = (JSONArray)parser.parse(new FileReader(fileName));
+			
+			
+			for(Object orderJson : ordersJson) {
+				
+				// Collect the necessary data from the file
+				String item_name = ((JSONObject)orderJson).get("item_ordered").toString();
+				int item_quantity = Integer.parseInt((String) ((JSONObject)orderJson).get("item_quantity"));
+				int order_month = LocalDateTime.parse((String)((JSONObject)orderJson).get("order_date")).getMonthValue();
+				
+				// If the map does not contain the mapping for a item yet then create a new array of size 12
+				// Else use an existing array and update the quantity for the correct month
+				if(ordersByMonths.get(item_name) == null) {
+					int[] num_of_orders = new int[12];
+					num_of_orders[order_month - 1] = item_quantity;
+					ordersByMonths.put(item_name, num_of_orders);
+				}else {
+					int[] num_of_orders = ordersByMonths.get(item_name);
+					num_of_orders[order_month - 1] += item_quantity;
+				}
+			}
+			
+		} catch(FileNotFoundException ex) {
+			System.out.println("Orders.json file not found.");
+			throw ex;
+		} catch (IOException | ParseException ex) {
+			System.out.println("Exception while processing Orders.json file.");
+			throw ex;
+		}
+	
+		return ordersByMonths;
 	}
 }

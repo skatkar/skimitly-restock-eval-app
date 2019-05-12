@@ -24,12 +24,23 @@ public class RestockEvalApp {
 		
 		RestockEvalService service  = new RestockEvalService();
 		Map<String, int[]> restocksByMonths;
+		Map<String, int[]> ordersByMonths;
 		
 		try {
 			restocksByMonths = service.loadRestocksFromFile("restocks.json");
 			
 			System.out.println("Restock stats");
 			restocksByMonths.forEach((key,value) ->{
+				System.out.print(key + " :[ ");
+				for(int i:value) {
+					System.out.print(i + ",");
+				}
+				System.out.println(" ]");
+			});
+			
+			ordersByMonths = service.loadOrdersFromFile("orders.json");
+			System.out.println("Order stats");
+			ordersByMonths.forEach((key,value) ->{
 				System.out.print(key + " :[ ");
 				for(int i:value) {
 					System.out.print(i + ",");
