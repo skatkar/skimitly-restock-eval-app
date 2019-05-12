@@ -3,6 +3,7 @@
  */
 package com.skimitly.restock.main;
 
+import java.util.List;
 import java.util.Map;
 
 import com.skimitly.restock.service.RestockEvalService;
@@ -47,6 +48,11 @@ public class RestockEvalApp {
 				}
 				System.out.println(" ]");
 			});
+			
+			System.out.println("***** Going for evaluation **********");
+			List<String> responseStats = service.evalRestock(ordersByMonths, restocksByMonths);
+			
+			responseStats.forEach((stat) -> System.out.println(stat));
 			
 		} catch (Exception e) {
 			e.printStackTrace();

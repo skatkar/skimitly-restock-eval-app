@@ -9,6 +9,7 @@ import static org.junit.Assert.assertNotNull;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import org.json.simple.JSONArray;
@@ -156,5 +157,45 @@ public class RestockEvalServiceTest {
 
 		Map<String, int[]> orderMonthmap = service.loadOrdersFromFile("orders.json");
 		assertNotNull(orderMonthmap);
+	}
+	
+	@Test
+	public void test_evalRestock_Success() {
+
+		List<String> stocks = service.evalRestock(RestockEvalFixture.getOrdersByMonthsMap(),
+				RestockEvalFixture.getRestocksByMonthsMap());
+
+		assertNotNull(stocks);
+		assertEquals("SUCCESS", stocks.get(0));
+		assertEquals("4 shovel",stocks.get(1));
+		assertEquals("4 snowblower",stocks.get(2));
+		assertEquals("2 sled",stocks.get(3));
+		assertEquals("2 tires",stocks.get(4));
+	}
+	
+	
+	@Test
+	public void test_evalRestock_out_of_stock() {
+
+		List<String> stocks = service.evalRestock(RestockEvalFixture.getOrdersByMonthsMap(),
+				RestockEvalFixture.getRestocksByMonthsMap_out_of_stock());
+
+		assertNotNull(stocks);
+		assertEquals("OUT OF STOCK", stocks.get(0));
+		
+	}
+	
+	
+	@Test
+	public void test_evalRestock_No_order() {
+		List<String> stocks = service.evalRestock(RestockEvalFixture.getOrdersByMonthsMap_No_order(),
+				RestockEvalFixture.getRestocksByMonthsMap());
+
+		assertNotNull(stocks);
+		assertEquals("120 skis",stocks.get(1));
+		assertEquals("130 shovel",stocks.get(2));
+		assertEquals("105 snowblower",stocks.get(3));
+		assertEquals("96 sled",stocks.get(4));
+		assertEquals("100 tires",stocks.get(5));
 	}
 }

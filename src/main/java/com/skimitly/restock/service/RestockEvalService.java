@@ -6,9 +6,12 @@ package com.skimitly.restock.service;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.DateFormatSymbols;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.json.simple.JSONArray;
@@ -23,6 +26,10 @@ import org.json.simple.parser.ParseException;
  */
 public class RestockEvalService {
 
+	final String[] months = new DateFormatSymbols().getMonths();
+	
+	List<String> successful_Stocks = new ArrayList<>();
+	List<String> out_of_order_Stocks = new ArrayList<>();
 
 	/**
 	 * Method to parse the restocks.json file and create the map
@@ -116,5 +123,73 @@ public class RestockEvalService {
 		}
 	
 		return ordersByMonths;
+	}
+	
+
+	/**
+	 * Method to evaluate restock algorithm
+	 * @param ordersByMonths
+	 * @param restocksByMonths
+	 * @return Restock status
+	 */
+	public List<String> evalRestock(Map<String,int[]> ordersByMonths, Map<String,int[]> restocksByMonths) {
+		
+		restocksByMonths.forEach((key,value)-> {
+			String item_name = key;
+			int[] num_of_restocks = value;
+			
+			// If the restocked item is ordered at least once, go for finding out whether the restock was successful or not
+			// Else do the summation of restock quantity in each month for a given item
+			if(ordersByMonths.containsKey(item_name)) {
+				int[] num_of_orders = ordersByMonths.get(item_name);
+				
+				processData(item_name,num_of_restocks,num_of_orders);
+			}else {
+				calculateTotalStock(item_name, num_of_restocks);
+			}
+		});
+		
+		return generateRestocksEvalStatus();
+
+	}
+	
+	private List<String> generateRestocksEvalStatus() {
+		if(!out_of_order_Stocks.isEmpty()) {
+			out_of_order_Stocks.add(0, "OUT OF STOCK");
+			return out_of_order_Stocks;
+		}
+		
+		if(!successful_Stocks.isEmpty()) {
+			successful_Stocks.add(0, "SUCCESS");
+			return successful_Stocks;
+		}
+		
+		successful_Stocks.add("No restocks");
+		return successful_Stocks;
+	}
+
+	private void processData(String item_name,int[] num_of_restocks, int[] num_of_orders) {
+		int old_stock_quantity = 0;
+		
+		for(int i=0; i < num_of_restocks.length; i++) {
+			if(old_stock_quantity < 0) {
+				out_of_order_Stocks.add(item_name + " for the month of " + months[i-1]);
+				return;
+			}else {
+				old_stock_quantity = old_stock_quantity + num_of_restocks[i] - num_of_orders[i];
+			}
+		}
+		
+		if(old_stock_quantity != 0)
+			successful_Stocks.add(old_stock_quantity + " " + item_name);
+	}
+
+	private void calculateTotalStock(String item_name, int[] restockItems) {
+		int total = 0;
+		for(int restockItem : restockItems) {
+			total += restockItem;
+		}
+		
+		successful_Stocks.add(total + " " + item_name);
 	}
 }

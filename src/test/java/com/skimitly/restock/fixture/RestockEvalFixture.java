@@ -3,6 +3,9 @@
  */
 package com.skimitly.restock.fixture;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -102,5 +105,48 @@ public class RestockEvalFixture {
 		jsonArray.add(jsonObject3);
 
 		return jsonArray;
+	}
+	
+	public static Map<String, int[]> getOrdersByMonthsMap() {
+
+		Map<String, int[]> ordersByMonthsMap = new HashMap<String, int[]>();
+		ordersByMonthsMap.put("sled", new int[] { 18,7,21,0,0,0,0,0,14,23,3,8 });
+		ordersByMonthsMap.put("tires", new int[] { 18,14,6,2,0,0,5,0,10,16,9,18 });
+		ordersByMonthsMap.put("shovel", new int[] { 23,9,16,9,7,4,2,8,5,25,16,2 });
+		ordersByMonthsMap.put("snowblower", new int[] { 8,16,7,2,0,0,0,0,13,5,38,12 });
+		ordersByMonthsMap.put("skis", new int[] { 4,26,23,0,0,0,0,14,5,19,15,14 });
+
+		return ordersByMonthsMap;
+	}
+	
+	public static Map<String, int[]> getOrdersByMonthsMap_No_order(){
+		Map<String, int[]> ordersByMonthsMap = new HashMap<String, int[]>();
+		return ordersByMonthsMap;
+	}
+	
+	public static Map<String, int[]> getRestocksByMonthsMap() {
+		
+		Map<String, int[]> restocksByMonthsMap = new HashMap<String, int[]>();
+		
+		restocksByMonthsMap.put("skis",new int[]{5,25,25,5,5,5,5,5,5,10,15,10});
+		restocksByMonthsMap.put("shovel",new int[]{25,10,15,10,5,5,5,5,5,25,15,5});
+		restocksByMonthsMap.put("snowblower",new int[]{25,5,5,5,5,5,5,5,5,5,20,15});
+		restocksByMonthsMap.put("sled",new int[]{25,15,6,5,5,5,5,5,5,10,5,5});
+		restocksByMonthsMap.put("tires",new int[]{20,15,5,5,5,5,5,5,5,5,5,20});
+		
+		return restocksByMonthsMap;
+	}
+	
+	public static Map<String, int[]> getRestocksByMonthsMap_out_of_stock() {
+
+		Map<String, int[]> restocksByMonthsMap = new HashMap<String, int[]>();
+		
+		restocksByMonthsMap.put("skis",new int[]{5,25,25,5,5,5,5,5,5,10,15,10});
+		restocksByMonthsMap.put("shovel",new int[]{25,10,15,10,5,5,5,5,5,25,15,5});
+		restocksByMonthsMap.put("snowblower",new int[]{25,5,5,5,5,5,5,5,5,5,20,15});
+		restocksByMonthsMap.put("sled",new int[]{25,15,5,5,5,5,5,5,5,10,5,5});
+		restocksByMonthsMap.put("tires",new int[]{20,15,5,5,5,5,5,5,5,5,5,20});
+		
+		return restocksByMonthsMap;
 	}
 }
