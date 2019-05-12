@@ -137,6 +137,11 @@ public class RestockEvalFixture {
 		return restocksByMonthsMap;
 	}
 	
+	public static Map<String, int[]> getRestocksByMonthsMap_Empty() {
+		Map<String, int[]> restocksByMonthsMap = new HashMap<String, int[]>();
+		return restocksByMonthsMap;
+	}
+	
 	public static Map<String, int[]> getRestocksByMonthsMap_out_of_stock() {
 
 		Map<String, int[]> restocksByMonthsMap = new HashMap<String, int[]>();

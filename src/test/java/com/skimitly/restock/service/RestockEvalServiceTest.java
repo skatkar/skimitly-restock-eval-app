@@ -198,4 +198,11 @@ public class RestockEvalServiceTest {
 		assertEquals("96 sled",stocks.get(4));
 		assertEquals("100 tires",stocks.get(5));
 	}
+	
+	@Test
+	public void test_evalRestocks_Empty() {
+		List<String> stocks = service.evalRestock(RestockEvalFixture.getOrdersByMonthsMap(),
+				RestockEvalFixture.getRestocksByMonthsMap_Empty());
+		assertEquals("No restocks", stocks.get(0));
+	}
 }
