@@ -23,31 +23,34 @@ public class RestockEvalApp {
 		
 		long start = System.currentTimeMillis();
 		
+		String inputPath = getInputPath(args);
+		
 		RestockEvalService service  = new RestockEvalService();
 		Map<String, int[]> restocksByMonths;
 		Map<String, int[]> ordersByMonths;
 		
 		try {
-			restocksByMonths = service.loadRestocksFromFile("restocks.json");
+			restocksByMonths = service.loadRestocksFromFile(inputPath + "restocks.json");
 			
-			System.out.println("Restock stats");
+			/*System.out.println("Restock stats");
 			restocksByMonths.forEach((key,value) ->{
 				System.out.print(key + " :[ ");
 				for(int i:value) {
 					System.out.print(i + ",");
 				}
 				System.out.println(" ]");
-			});
+			});*/
 			
-			ordersByMonths = service.loadOrdersFromFile("orders.json");
-			System.out.println("Order stats");
+			ordersByMonths = service.loadOrdersFromFile(inputPath + "orders.json");
+			
+			/*System.out.println("Order stats");
 			ordersByMonths.forEach((key,value) ->{
 				System.out.print(key + " :[ ");
 				for(int i:value) {
 					System.out.print(i + ",");
 				}
 				System.out.println(" ]");
-			});
+			});*/
 			
 			System.out.println("***** Going for evaluation **********");
 			List<String> responseStats = service.evalRestock(ordersByMonths, restocksByMonths);
@@ -61,6 +64,16 @@ public class RestockEvalApp {
 		long end = System.currentTimeMillis();
 		
 		System.out.println("\nTime took: " + (end - start) + " (ms)");
+	}
+	
+	private static String getInputPath(String[] args) {
+		String inputPath = "";
+		if(args.length == 0) {
+			System.out.println("Path for input files not provided.");
+			System.out.println("Moving forward with default files");
+		}else	
+			inputPath = args[0] + "\\";
+		return inputPath;
 	}
 
 }
