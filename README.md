@@ -2,14 +2,14 @@
 This is an application to evaluate the restock algrithm used by skimitly. It evaluates a restocking algorithm against SkiMitlyâ€™s actual order history. The two input files supposed to contain the data of restock events and another to contain order events.
 
 If this application determines that the algorithm was successful then the output will include:
-	**SUCCESS** message and the remaining inventory
+	__SUCCESS__ message and the remaining inventory
 Else output will include:
-	**OUT OF STOCK** message and which product SkiMitly ran out of, and when it ran out.
+	__OUT OF STOCK__ message and which product SkiMitly ran out of, and when it ran out.
 	
 ## Technical details
-	*Programming langauge: Java (version 1.8.0)*
-	*Testing frameworks: JMockit (version 1.46), JUnit(version 4.12)*
-	*Build tool: Apache Maven (version 3.6.0)*
+	_Programming langauge: Java (version 1.8.0)_
+	_Testing frameworks: JMockit (version 1.46), JUnit(version 4.12)_
+	_Build tool: Apache Maven (version 3.6.0)_
 	
 ## Assumptions
 1. Items in the oreders.json are the subset of items in the restocks.json file. In simple words, whatever are the products in the orders.json has to be there in the restocks.json file even if that particular item has restock quantity as 0 for all the months. If such item exist which is not there in restocks file then evaluation for that item will be skipped.
