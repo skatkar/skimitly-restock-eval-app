@@ -1,5 +1,5 @@
 # skimitly-restock-eval-app
-This is an application to evaluate the restock algrithm used by skimitly. It evaluates a restocking algorithm against SkiMitly's actual order history. The two input files supposed to contain the data of restock events and another to contain order events.
+This is an application to evaluate the restock algrithm used by skimitly. It evaluates a restocking algorithm against SkiMitly's actual order history. The two input files are supposed to contain the data of restock events and another to contain order events.
 
 If this application determines that the algorithm was successful then the output will include:
 	__SUCCESS__ message and the remaining inventory
@@ -24,9 +24,9 @@ Else output will include:
 3. Read the file orders.json
 4. Generate the mapping of an item and its monthwise order quantity
 5. Use these two mappings to do the further processing of evaluation. Possible scenarios:
-	5.1 Item listed in the restocks file is also listed in the orders file - determine whether restock was successful or not. 
-	5.2 Item listed in the restocks file is not there in the orders file - calculate the sum of restock quantity for all the months for that item.
-	5.3 Mapping generated in the step 2 above is empty - return response containing the message as "No restock"
+5.1 Item listed in the restocks file is also listed in the orders file - determine whether restock was successful or not. 
+5.2 Item listed in the restocks file is not there in the orders file - calculate the sum of restock quantity for all the months for that item.
+5.3 Mapping generated in the step 2 above is empty - return response containing the message as "No restock"
 
 
 ## Design decisions
@@ -65,7 +65,7 @@ The design decision is based on the intuition, experimenting with the sample dat
 	C:\skimitly-restock-eval-app> mvnw.cmd clean package
 	
 	Step 8:
-	Once the buils is successful, it will generate the target directory at the same location. Go inside the directory and check whether two jar files named: restock-eval-app.jar and restock-eval-app-jar-with-dependencies.jar are generated or not.
+	Once the build is successful, it will generate the target directory at the same location. Go inside the directory and check whether two jar files named: restock-eval-app.jar and restock-eval-app-jar-with-dependencies.jar are generated or not.
 	
 	Step 9:
 	If these jar files are verified then go back to the directory where the repository was cloned.
