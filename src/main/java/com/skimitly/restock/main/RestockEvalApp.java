@@ -72,7 +72,7 @@ public class RestockEvalApp {
 			System.out.println("Path for input files not provided.");
 			System.out.println("Moving forward with default files");
 		}else	
-			inputPath = args[0] + "\\";
+			inputPath = args[0] + "//";
 		return inputPath;
 	}
 
