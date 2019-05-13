@@ -39,10 +39,13 @@ The design decision is based on the intuition, experimenting with the sample dat
 ### Build steps
 		
 	Step 1:
-	Make sure that JDK (at least version 8) is installed on the system. It can be downloaded from https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
+	Make sure that JDK (at least version 8) is installed on the system. 
+	It can be downloaded from https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
 	
 	Step 2:
-	The build tool used for this application is Maven. It requires that JAVA_HOME environment variable is set. The steps can be found at https://www.thewindowsclub.com/set-java_home-in-windows-10
+	The build tool used for this application is Maven. 
+	It requires that JAVA_HOME environment variable is set. 
+	The steps can be found at https://www.thewindowsclub.com/set-java_home-in-windows-10
 	
 	Step 3:
 	Install git bash client. It can be downloaded from https://git-scm.com/download/win
@@ -55,14 +58,14 @@ The design decision is based on the intuition, experimenting with the sample dat
 	C:\> git clone https://github.com/skatkar/skimitly-restock-eval-app.git
 	
 	Step 6:
-	Upon successfully downloading all the files from this git repository, go to the directory named *skimitly-restock-eval-app*.
+	Upon successfully downloading all the files from this git repository, go to the directory named skimitly-restock-eval-app.
 	
 	Step 7:
 	Execute below command. Wait for the build to complete. At the end it will show message as BUILD SUCCESS and total time taken to build.
 	C:\skimitly-restock-eval-app> mvnw.cmd clean package
 	
 	Step 8:
-	Once the buils is successful, it will generate the target directory at the same location. Go inside the directory and check whether two jar files named: *restock-eval-app.jar* and *restock-eval-app-jar-with-dependencies.jar* are generated or not.
+	Once the buils is successful, it will generate the target directory at the same location. Go inside the directory and check whether two jar files named: restock-eval-app.jar and restock-eval-app-jar-with-dependencies.jar are generated or not.
 	
 	Step 9:
 	If these jar files are verified then go back to the directory where the repository was cloned.
@@ -86,10 +89,11 @@ The design decision is based on the intuition, experimenting with the sample dat
 ### Build steps
 		
 	Step 1:
-	Make sure that JDK (at least version 8) is installed on the system. It can be downloaded from [here](https://thishosting.rocks/install-java-ubuntu/)
+	Make sure that JDK (at least version 8) is installed on the system. 
+	It can be downloaded from (https://thishosting.rocks/install-java-ubuntu/)
 	
 	Step 2:
-	Install git bash client. It can be downloaded from [here](https://www.digitalocean.com/community/tutorials/how-to-install-git-on-ubuntu-18-04)
+	Install git bash client. It can be downloaded from (https://www.digitalocean.com/community/tutorials/how-to-install-git-on-ubuntu-18-04)
 	
 	Step 3:
 	After successful installations of JDK and git, go to any directory
@@ -99,7 +103,7 @@ The design decision is based on the intuition, experimenting with the sample dat
 	ubuntu$ git clone https://github.com/skatkar/skimitly-restock-eval-app.git
 			
 	Step 5:
-	If the code successfully cloned then go to the directory named *skimitly-restock-eval-app*
+	If the code successfully cloned then go to the directory named skimitly-restock-eval-app
 	
 	Step 6:
 	Provide the execute permission to the mvnw file using 
